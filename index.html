@@ -48,9 +48,12 @@
             <div class="misc-btn-container">   
                 <hr />
                 <p class="div-header" data-trans="misc-header">Misc</p>
-                <button class="view-switch-btn" onclick="onSwitchBooksDisplay()"><img class="view-switch-img" src="img/cards-icon.png"></button>
-                <button class="view-switch-btn" onclick="onSwitchLang()"><img class="view-switch-img" src="img/cards-icon.png"></button>
                 <button class="create-new-book-btn" onclick="onOpenAddBookModal()"><img class="add-book-icon" src="img/add-book-icon.png" alt=""></button>
+                <button class="view-switch-btn" onclick="onSwitchBooksDisplay()"><img class="view-switch-img" src="img/cards-icon.png"></button>
+                <select class="lang-select" onchange="onSetLang(this.value)">
+                    <option value="eng">English</option>
+                    <option value="heb">עברית</option>
+                </select>
             </div> 
             
         </section>
@@ -58,7 +61,7 @@
 
         </section>
         <div class="scroll-page-btns">
-            <p class="page" data-trans="page">Page: <span></span></p>
+            <p class="page"><span data-trans="page">Page</span>: <span class="page-num"></span></p>
             <button data-next="" data-operation="prev" onclick="onSetPage(+this.dataset.next)">&lt;&lt;</button>
             <button data-next="" data-operation="1"  onclick="onSetPage(+this.dataset.next)">1</button>
             <button data-next="" data-operation="2" onclick="onSetPage(+this.dataset.next)">2</button>
@@ -73,10 +76,10 @@
         <div class="abstract">
             <p></p>
         </div>
-        <P class="book-data id" data-trans="book-id">ID: <span></span></P>
-        <P class="book-data name" data-trans="book-name">Name: <span></span></P>
-        <P class="book-data price" data-trans="book-price">Price: <span></span>$</P>
-        <P class="book-data img-url" data-trans="img-url">Image url: <span></span></P>
+        <P class="book-data id"><span data-trans="book-id">ID</span>: <span class="name-id"></span></P>
+        <P class="book-data name"><span data-trans="book-name">Name</span>: <span class="name-name"></span></P>
+        <P class="book-data price"><span data-trans="book-price">Price</span>: <span class="name-price"></span>$</P>
+        <P class="book-data img-url"><span data-trans="img-url">Image url</span>: <span class="name-img-url"></span></P>
         <label class="book-rate">
             <p data-trans="rating">Rating: </p>
             <button onclick="onSetRating(-1)">➖</button>
@@ -93,10 +96,10 @@
         <section class="new-book-input">
             <p class="div-header" data-trans="add-book-modal-header" >New Book Data</p>
             <form class="book-input-btns" onsubmit="return false">
-                <input class="btn-border" type="text" name="name" placeholder="Enter Book Name..">
-                <input class="btn-border" type="text" name="price" placeholder="Enter Book Price..">
-                <input class="btn-border" type="text" name="rating" placeholder="Enter Book Rating..">
-                <input class="btn-border" type="text" name="imgUrl" placeholder="Enter Image Url..">
+                <input class="btn-border" type="text" name="name" data-trans="enter-book-name-placeholder" placeholder="Enter Book Name..">
+                <input class="btn-border" type="text" name="price" data-trans="enter-book-price-placeholder" placeholder="Enter Book Price..">
+                <input class="btn-border" type="text" name="rating" data-trans="enter-book-rating-placeholder" placeholder="Enter Book Rating..">
+                <input class="btn-border" type="text" name="imgUrl" data-trans="enter-book-img-placeholder" placeholder="Enter Image Url..">
                 <button class="add-book-btn" onclick="onAddBook()" data-trans="submit">Submit</button>
                 <button onclick="onCloseAddBookModal()" data-trans="cancel">Cancel</button>
             </form>

@@ -16,6 +16,7 @@ function renderApp() {
     renderAppByQueryStringParams()
     renderPaging()
     renderBooks()
+    
 }
 
 function renderPaging() {
@@ -45,7 +46,7 @@ function renderPaging() {
         }
     })
 
-    const page = document.querySelector('.page span')
+    const page = document.querySelector('.page-num')
     page.innerText = currPage
 }
 
@@ -56,8 +57,8 @@ function renderBooks() {
 
     if (view === 'list') {
         var booksKeys = ['ID', 'Name', 'Price', 'Rating', 'Image']
-        booksKeys = booksKeys.map(key => `\n\t<td>${key}</td>`)
-        booksKeys.push(`\n\t<td colspan="3">Options</td>`)
+        booksKeys = booksKeys.map(key => `\n\t<td data-trans="${key.toLowerCase()}">${_getTrans(key.toLowerCase())}</td>`)
+        booksKeys.push(`\n\t<td data-trans="options" colspan="3">${_getTrans('options')}</td>`)
     
         //  Change name
         const strHTMLsTableBodyTd = books.map((book) => `
@@ -67,9 +68,9 @@ function renderBooks() {
                 <td>${book.price}</td>
                 <td>${book.rating}</td>
                 <td><img src="${book.imgUrl}"></img></td>
-                <td><button onclick="onOpenBookModal('${book.id}')">Read</button></td>
-                <td><button onclick="onUpdateBook('${book.id}')">Update</button></td>
-                <td><button onclick="onRemoveBook('${book.id}')">Delete</button></td>
+                <td><button data-trans="read-action" onclick="onOpenBookModal('${book.id}')">Read</button></td>
+                <td><button data-trans="update-action" onclick="onUpdateBook('${book.id}')">Update</button></td>
+                <td><button data-trans="delete-action" onclick="onRemoveBook('${book.id}')">Delete</button></td>
             </tr>
         `)
     
@@ -106,10 +107,13 @@ function renderBooks() {
     elSection.innerHTML = elSectionStrHtml
 }
 
+
 function updateWindowPath() {
     _setQueryStringByFilter()
     _setQueryStringByModal()
     _setQueryStringByPage()
+    _setQueryStringByLang()
+    console.log(gQueryString);
 
     const queryString = getQueryStringParams()
 
@@ -118,7 +122,7 @@ function updateWindowPath() {
 }
 
 function getQueryStringParams() {
-    return `?maxPrice=${gQueryString.maxPrice}&minRate=${gQueryString.minRate}&custom=${gQueryString.custom}&bookId=${gQueryString.bookId}&page=${gQueryString.currPage}`
+    return `?maxPrice=${gQueryString.maxPrice}&minRate=${gQueryString.minRate}&custom=${gQueryString.custom}&bookId=${gQueryString.bookId}&page=${gQueryString.currPage}&lang=${gQueryString.lang}`
 }
 
 function renderAppByQueryStringParams() {
@@ -131,17 +135,17 @@ function renderAppByQueryStringParams() {
     const pageParams = {
         bookId: queryStringParams.get('bookId') || '',
         currPage: queryStringParams.get('page') || 0,
+        lang: queryStringParams.get('lang') || 'eng'
     }
 
-    // if (!filterParams.maxPrice && !filterParams.minRate && !filterParams.custom && !modalParams.bookId && !modalParams.currPage) return
-
-    
     document.querySelector('.filter-price-range').value = filterParams.maxPrice
     document.querySelector('.filter-rate-range').value = filterParams.minRate
     document.querySelector('.custom-filter').value = filterParams.custom
+    document.querySelector('.lang-select').value = pageParams.lang
 
     _setOpenBookByQueryParam(pageParams.bookId)
     _setPageByQueryParam(+pageParams.currPage)
+    _setLangByQueryParam(pageParams.lang)
     setFilterBy(filterParams)
 }
 
@@ -172,12 +176,13 @@ function onAddBook() {
 function onOpenBookModal(bookId) {
 
     const book = openBook(bookId)
-    
+    console.log('bookId', bookId);
+    console.log('book', book);
     document.querySelector('.abstract').innerText = book.abstract
-    document.querySelector('.id span').innerText = book.id
-    document.querySelector('.name span').innerText = book.name
-    document.querySelector('.price span').innerText = book.price
-    document.querySelector('.img-url span').innerText = book.imgUrl
+    document.querySelector('.name-id').innerText = book.id
+    document.querySelector('.name-name').innerText = book.name
+    document.querySelector('.name-price').innerText = book.price
+    document.querySelector('.name-img-url').innerText = book.imgUrl
     document.querySelector('.rating span').innerText = book.rating
    
     // CR Implement: 
@@ -272,12 +277,15 @@ function onSwitchBooksDisplay() {
     elImg.src = `img/${view}-icon.png`
 }
 
-function onSwitchLang() {
-    switchLang()
-    renderApp()
+function onSetLang(lang) {
+    setLang(lang)
+    updateWindowPath()
 }
 
 
+function _setLangByQueryParam(lang) {
+    onSetLang(lang)
+}
 
 function _setModalDisplay(state) {
     const elModal = document.querySelector('.book-information-modal')
@@ -300,6 +308,11 @@ function _setQueryStringByModal() {
 function _setQueryStringByPage() {
     const currPage = getPagingData().currPage
     gQueryString.currPage = currPage
+}
+
+function _setQueryStringByLang() {
+    const lang = getLang()
+    gQueryString.lang = lang
 }
 
 function _setOpenBookByQueryParam(bookId) {

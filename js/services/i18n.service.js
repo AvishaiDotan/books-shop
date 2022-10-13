@@ -3,7 +3,7 @@
 const ENGLISH = 'eng'
 const HEBREW = 'heb'
 
-var gCurrLang = ENGLISH
+var gLang = ENGLISH
 
 const gTrans = {
     'title': {
@@ -94,9 +94,86 @@ const gTrans = {
         'heb': 'בטל',
         'eng': 'Cancel',
     },
-    
+    'id': {
+        'heb': 'מזהה',
+        'eng': 'ID',
+    },
+    'name': {
+        'heb': 'שם',
+        'eng': 'Name',
+    },
+    'price': {
+        'heb': 'מחיר',
+        'eng': 'Price',
+    },
+    'image': {
+        'heb': 'תמונה',
+        'eng': 'Image',
+    },
+    'options': {
+        'heb': 'אפשרויות',
+        'eng': 'Options',
+    },
+    'book-name': {
+        'heb': 'שם הספר',
+        'eng': 'Book Name',
+    },
+    'read-action': {
+        'heb': 'פתח',
+        'eng': 'Read',
+    },
+    'update-action': {
+        'heb': 'עדכן',
+        'eng': 'Update',
+    },
+    'delete-action': {
+        'heb': 'מחק',
+        'eng': 'Delete',
+    },
+    'enter-book-name-placeholder': {
+        'heb': '...הכנס את שם הספר',
+        'eng': 'Enter Book\'s Name...',
+    },
+    'enter-book-price-placeholder': {
+        'heb': 'הכנס את מחיר הספר...',
+        'eng': 'Enter Book Price..',
+    },
+    'enter-book-rating-placeholder': {
+        'heb': 'הכנס את דירוג הספר...',
+        'eng': 'Enter Book Rating..',
+    },
+    'enter-book-img-placeholder': {
+        'heb': 'הכנס את תמונת הספר...',
+        'eng': 'Enter Image Url..',
+    },
+
 }
 
-function switchLang() {
-    gCurrLang = (gCurrLang === ENGLISH) ? HEBREW : ENGLISH
+function doTrans() {
+    const els = document.querySelectorAll('[data-trans]')
+    els.forEach(el => {
+        const transKey = el.dataset.trans
+        const trans = _getTrans(transKey)
+        el.innerText = trans
+        if (el.placeholder) el.placeholder = trans
+    })
+}
+
+function setLang(newLang) {
+    gLang = newLang
+    doTrans()
+}
+
+function getLang() {
+    return gLang
+}
+
+function _getTrans(transKey) {
+    const transMap = gTrans[transKey]
+    if (!transMap) return 'Unknown'
+
+    const trans = transMap[gLang]
+    if (!trans) return transMap[ENGLISH]
+
+    return trans
 }
