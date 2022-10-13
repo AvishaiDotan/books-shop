@@ -64,7 +64,7 @@ function renderBooks() {
             <tr>
                 <td>${book.id}</td>
                 <td>${book.name}</td>
-                <td data-price="${book.price}" >${formatCurrencySign(book.price)}</td>
+                <td data-price="${book.price}" >${getFormatNumber(book.price)}</td>
                 <td>${book.rating}</td>
                 <td><img src="${book.imgUrl}"></img></td>
                 <td><button data-trans="read-action" onclick="onOpenBookModal('${book.id}')">Read</button></td>
@@ -92,16 +92,14 @@ function renderBooks() {
             <img src="${book.imgUrl}">
             <p>${book.name}</p>
             <div class="books-option-btns-container">
-                <button onclick="onOpenBookModal('${book.id}')">Read</button></td>
-                <button onclick="onUpdateBook('${book.id}')">Update</button></td>
-                <button onclick="onRemoveBook('${book.id}')">Delete</button></td>
+                <button data-trans="read-action" onclick="onOpenBookModal('${book.id}')">Read</button></td>
+                <button data-trans="update-action" onclick="onUpdateBook('${book.id}')">Update</button></td>
+                <button data-trans="delete-action" onclick="onRemoveBook('${book.id}')">Delete</button></td>
             </div>
         </article>`)
         elSectionStrHtml = articles.join('')
     }
 
-
-    
     const elSection = document.querySelector('.books-layout')
     elSection.innerHTML = elSectionStrHtml
 }
@@ -181,7 +179,7 @@ function onOpenBookModal(bookId) {
     document.querySelector('.abstract').innerText = book.abstract
     document.querySelector('.name-id').innerText = book.id
     document.querySelector('.name-name').innerText = book.name
-    document.querySelector('.name-price').innerText = book.price
+    document.querySelector('.name-price').innerText = getFormatNumber(currencyConversion(book.price))
     document.querySelector('.name-img-url').innerText = book.imgUrl
     document.querySelector('.rating span').innerText = book.rating
    
@@ -202,14 +200,14 @@ function onCloseBookModal() {
     _setModalDisplay(OFF)
 
     updateWindowPath()
-    renderPaging()
     renderBooks()
+    doTrans()
 }
 
 function onUpdateBook(bookId) {
     const price = prompt('New price?')
     updateBook(bookId, price)
-    
+
     renderPaging()
     renderBooks()
 }
@@ -283,6 +281,8 @@ function onSwitchBooksDisplay() {
 
     const elImg = document.querySelector('.view-switch-img')
     elImg.src = `img/${view}-icon.png`
+
+    doTrans()
 }
 
 function onSetLang(lang) {

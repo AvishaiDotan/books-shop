@@ -13,6 +13,10 @@ body {
     width: 100%;
 }
 
+body.rtl {
+    direction: rtl;
+}
+
 .dark-overlay {
     width: 100vw;
     height: 100vh;
@@ -28,8 +32,8 @@ body {
     flex-direction: column;
     width: 50%;
 
-    position: relative;
-    top: 28%;
+    position: absolute;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     
@@ -41,7 +45,7 @@ body {
 }
 
 .new-book-input {
-    position: relative;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -165,31 +169,26 @@ td img {
 
 .book-information-modal {
     position: fixed;
-    top: 0;
+    top: 100px;
     right: -500px;
+    z-index: 10;
 
     min-width: 500px;
     height: 100vh;
+    
     background-color: #FCCC82;
     box-shadow: -8px 0px 10px -8px #000000;
 }
 
 .book-information-modal h1 {
-    margin-block-start: 140px;
+    margin-block-start: 30px;
     text-align: center;
     font-size: 3rem;
 }
 
 
 .book-data {
-    position: relative;
-    
-    margin-block-start: 20px;
-    left: 50%;
-
-    max-width: 400px;
-    transform: translate(-50%, -50%);
-
+    min-width: 400px;
     text-align: justify;
     padding: 5px;
     box-shadow: inset 5px 5px 10px -3px #000000;
@@ -197,19 +196,30 @@ td img {
 }
 
 .abstract {
-    position: relative;
-    
-    
-    margin-block-start: 100px;
+    position: absolute;
+
+    margin-block-start: 205px;
     left: 50%;
+    min-width: 400px;
 
-    max-width: 400px;
     transform: translate(-50%, -50%);
-
     text-align: justify;
     padding: 5px;
     box-shadow: inset 5px 5px 10px -3px #000000;
     border: 3px #8E88A0 solid;
+}
+
+.book-data-container {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    margin-block-start: 300px;
+    padding: 50px;
+}
+
+.modal-actions-container {
+    margin-block-start: 640px;
 }
 
 .book-rate {

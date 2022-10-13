@@ -72,23 +72,27 @@
         </div>
     </section>
     <section class="book-information-modal">
-        <h1 data-trans="book-abstract">Book Abstract</h1>
-        <div class="abstract">
-            <p></p>
-        </div>
-        <P class="book-data id"><span data-trans="book-id">ID</span>: <span class="name-id"></span></P>
-        <P class="book-data name"><span data-trans="book-name">Name</span>: <span class="name-name"></span></P>
-        <P class="book-data price"><span data-trans="book-price">Price</span>: <span class="name-price"></span>$</P>
-        <P class="book-data img-url"><span data-trans="img-url">Image url</span>: <span class="name-img-url"></span></P>
-        <label class="book-rate">
-            <p data-trans="rating">Rating: </p>
-            <button onclick="onSetRating(-1)">➖</button>
-            <span class="rating"><span></span></span>
-            <button onclick="onSetRating(+1)">➕</button>
-        </label>
-        <div class="close-modal-btn">
-            <button onclick="onCloseBookModal()" data-trans="close" >Close</button>
-        </div>
+            <h1 data-trans="book-abstract">Book Abstract</h1>
+            <div class="abstract">
+                <p></p>
+            </div>
+            <div class="book-data-container">
+                <P class="book-data id"><span data-trans="book-id">ID</span>: <span class="name-id"></span></P>
+                <P class="book-data name"><span data-trans="book-name">Name</span>: <span class="name-name"></span></P>
+                <P class="book-data price"><span data-trans="book-price">Price</span>: <span class="name-price"></span></P>
+                <P class="book-data img-url"><span data-trans="img-url">Image url</span>: <span class="name-img-url"></span></P>
+            </div>
+            <div class="modal-actions-container">
+                <label class="book-rate">
+                    <p data-trans="rating">Rating: </p>
+                    <button onclick="onSetRating(-1)">➖</button>
+                    <span class="rating"><span></span></span>
+                    <button onclick="onSetRating(+1)">➕</button>
+                </label>
+                <div class="close-modal-btn">
+                    <button onclick="onCloseBookModal()" data-trans="close" >Close</button>
+                </div>
+            </div>
     </section>
     
 

@@ -162,28 +162,38 @@ function doTrans() {
     els = document.querySelectorAll('[data-price]')
 
     els.forEach(el => {
-        el.innerText = formatCurrencySign(currencyConversion(+el.dataset.price))
+        el.innerText = getFormatNumber(currencyConversion(+el.dataset.price))
     })
 }
 
 function setLang(newLang) {
     gLang = newLang
     doTrans()
+    setDisplayDirection()
 }
 
 function getLang() {
     return gLang
 }
 
-function formatCurrencySign(num) {
+function currencyConversion(amount) {
+    return (gLang === ENGLISH) ? amount : amount / 3.6
+}
+
+function setDisplayDirection() {
+    const direction = (gLang === ENGLISH) ? 'ltr' : 'rtl'
+    document.querySelector('body').style.direction = direction
+}
+
+function getPriceRange(rangeValue) {
+    return Math.round(currencyConversion(rangeValue))
+}
+
+function getFormatNumber(num) {
     const locale = (gLang === ENGLISH) ? 'en-US' : 'he-IL'
     const currency = (gLang === ENGLISH) ? 'USD' : 'ILS'
 
     return new Intl.NumberFormat(locale, {style: 'currency', currency,}).format(num);
-}
-
-function currencyConversion(amount) {
-    return (gLang === ENGLISH) ? amount : amount / 3.6
 }
 
 function _getTrans(transKey) {
@@ -196,8 +206,5 @@ function _getTrans(transKey) {
     return trans
 }
 
-function getPriceRange(rangeValue) {
-    return Math.round(currencyConversion(rangeValue))
-}
     
 
