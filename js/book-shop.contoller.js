@@ -13,7 +13,7 @@ function onInit() {
 
 
 function renderApp() {
-    renderDataByQueryStringParams()
+    renderAppByQueryStringParams()
     renderPaging()
     renderBooks()
 }
@@ -121,7 +121,7 @@ function getQueryStringParams() {
     return `?maxPrice=${gQueryString.maxPrice}&minRate=${gQueryString.minRate}&custom=${gQueryString.custom}&bookId=${gQueryString.bookId}&page=${gQueryString.currPage}`
 }
 
-function renderDataByQueryStringParams() {
+function renderAppByQueryStringParams() {
     const queryStringParams = new URLSearchParams(window.location.search)
     const filterParams = {
         maxPrice: queryStringParams.get('maxPrice') || '',
@@ -270,6 +270,11 @@ function onSwitchBooksDisplay() {
 
     const elImg = document.querySelector('.view-switch-img')
     elImg.src = `img/${view}-icon.png`
+}
+
+function onSwitchLang() {
+    switchLang()
+    renderApp()
 }
 
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Shop</title>
+    <title data-trans="title">Book Shop</title>
     <link rel="stylesheet" href="css\main.css">
 </head>
 
@@ -15,32 +15,31 @@
         <img src="img/books-icon.png" alt="old books icon">
     </header>
     <section class="books-container">
-        <h1>Book Shop</h1>
+        <h1 data-trans="title">Book Shop</h1>
         <section class="books-options-container">
             <div class="sorting-container">
                 <hr />
-                <p class="div-header">Sort</p>
+                <p class="div-header" data-trans="sort-header">Sort</p>
                 <select class="sort-by btn-border" onchange="onSetSortBy()">
-                    <option value="">Sort</option>
-                    <option value="price">By Price</option>
-                    <option value="rating">By Rating</option>
-                    <option value="name">By Name</option>
-                    <option value="id">By ID</option>
+                    <option data-trans="sort-header" value="">Sort</option>
+                    <option value="price" data-trans="by-price">By Price</option>
+                    <option value="rating" data-trans="by-rating">By Rating</option>
+                    <option value="name" data-trans="by-name">By Name</option>
+                    <option value="id" data-trans="by-id">By ID</option>
                 </select>
-                Descending: 
+                <span><span data-trans="sort-direction-checkbox-p">Descending</span>: </span>   
                 <input class="sort-desc" type="checkbox" onchange="onSetSortBy()" />
-                
             </div>
             <div class="filter-btns-container">
                 <hr />
-                <p class="div-header">Filter</p>
+                <p class="div-header" data-trans="filter-header">Filter</p>
                 <label>
-                    <span class="max-price-span">Max Price:</span>
+                    <span class="max-price-span"><span data-trans="max-price-range-header">Max Price</span>: </span>
                     <input type="range" min="50" max="270" value="160" class="filter-price-range btn-border"
                     onchange="this.title=this.value;onSetFilterBy({maxPrice: this.value})" />
                 </label>
                 <label>
-                    <span class="max-price-span">Min Rate: </span>
+                    <span class="max-price-span" data-trans="min-rate-range-header">Min Rate: </span>
                     <input type="range" min="0" max="10" value="5" class="filter-rate-range btn-border"
                     onchange="this.title=this.value;onSetFilterBy({minRate: this.value})" />
                 </label>
@@ -48,36 +47,18 @@
             </div>
             <div class="misc-btn-container">   
                 <hr />
-                <p class="div-header">Misc</p>
+                <p class="div-header" data-trans="misc-header">Misc</p>
                 <button class="view-switch-btn" onclick="onSwitchBooksDisplay()"><img class="view-switch-img" src="img/cards-icon.png"></button>
+                <button class="view-switch-btn" onclick="onSwitchLang()"><img class="view-switch-img" src="img/cards-icon.png"></button>
                 <button class="create-new-book-btn" onclick="onOpenAddBookModal()"><img class="add-book-icon" src="img/add-book-icon.png" alt=""></button>
             </div> 
             
         </section>
         <section class="books-layout">
-            <!-- <article>
-                <img src="" alt="" srcset="">
-                <p>Name</p>
-                <p>Actrions</p>
-            </article>
-            <table class="table-layout">
-                <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>Name</td>
-                        <td>Price</td>
-                        <td>Rating</td>
-                        <td>Image url</td>
-                        <td colspan="3">Actions</td>
-                    </tr>
-                </thead>
-                <tbody class="table-body">
-                </tbody>
-            </table> -->
+
         </section>
         <div class="scroll-page-btns">
-            <!-- TRY TO RENDER -->
-            <p class="page">Page: <span></span></p>
+            <p class="page" data-trans="page">Page: <span></span></p>
             <button data-next="" data-operation="prev" onclick="onSetPage(+this.dataset.next)">&lt;&lt;</button>
             <button data-next="" data-operation="1"  onclick="onSetPage(+this.dataset.next)">1</button>
             <button data-next="" data-operation="2" onclick="onSetPage(+this.dataset.next)">2</button>
@@ -88,36 +69,36 @@
         </div>
     </section>
     <section class="book-information-modal">
-        <h1>Book Abstract</h1>
+        <h1 data-trans="book-abstract">Book Abstract</h1>
         <div class="abstract">
             <p></p>
         </div>
-        <P class="book-data id">ID: <span></span></P>
-        <P class="book-data name">Name: <span></span></P>
-        <P class="book-data price">Price: <span></span>$</P>
-        <P class="book-data img-url">Image url: <span></span></P>
+        <P class="book-data id" data-trans="book-id">ID: <span></span></P>
+        <P class="book-data name" data-trans="book-name">Name: <span></span></P>
+        <P class="book-data price" data-trans="book-price">Price: <span></span>$</P>
+        <P class="book-data img-url" data-trans="img-url">Image url: <span></span></P>
         <label class="book-rate">
-            <p>Rating: </p>
+            <p data-trans="rating">Rating: </p>
             <button onclick="onSetRating(-1)">➖</button>
             <span class="rating"><span></span></span>
             <button onclick="onSetRating(+1)">➕</button>
         </label>
         <div class="close-modal-btn">
-            <button onclick="onCloseBookModal()">Close</button>
+            <button onclick="onCloseBookModal()" data-trans="close" >Close</button>
         </div>
     </section>
     
 
     <section class="dark-overlay hide-by-display">
         <section class="new-book-input">
-            <p class="div-header">New Book Data</p>
+            <p class="div-header" data-trans="add-book-modal-header" >New Book Data</p>
             <form class="book-input-btns" onsubmit="return false">
                 <input class="btn-border" type="text" name="name" placeholder="Enter Book Name..">
                 <input class="btn-border" type="text" name="price" placeholder="Enter Book Price..">
                 <input class="btn-border" type="text" name="rating" placeholder="Enter Book Rating..">
                 <input class="btn-border" type="text" name="imgUrl" placeholder="Enter Image Url..">
-                <button class="add-book-btn" onclick="onAddBook()">Submit</button>
-                <button onclick="onCloseAddBookModal()">Cancel</button>
+                <button class="add-book-btn" onclick="onAddBook()" data-trans="submit">Submit</button>
+                <button onclick="onCloseAddBookModal()" data-trans="cancel">Cancel</button>
             </form>
 
         </section> 
@@ -125,6 +106,7 @@
 
     <script src="js/services/utils.service.js"></script>
     <script src="js/services/storage.service.js"></script>
+    <script src="js/services/i18n.service.js"></script>
     <script src="js/services/book.service.js"></script>
     <script src="js/book-shop.contoller.js"></script>
 </body>
