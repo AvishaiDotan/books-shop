@@ -35,15 +35,15 @@
                 <p class="div-header" data-trans="filter-header">Filter</p>
                 <label>
                     <span class="max-price-span"><span data-trans="max-price-range-header">Max Price</span>: </span>
-                    <input type="range" min="50" max="270" value="160" class="filter-price-range btn-border"
-                    onchange="this.title=this.value;onSetFilterBy({maxPrice: this.value})" />
+                    <input type="range" min="0" max="400" value="200" class="filter-price-range btn-border"
+                    onchange="this.title=getPriceRange(+this.value);onSetFilterBy({maxPrice: this.value})" />
                 </label>
                 <label>
                     <span class="max-price-span" data-trans="min-rate-range-header">Min Rate: </span>
                     <input type="range" min="0" max="10" value="5" class="filter-rate-range btn-border"
                     onchange="this.title=this.value;onSetFilterBy({minRate: this.value})" />
                 </label>
-                <input class="custom-filter btn-border" type="text" placeholder="Enter Book Name..." oninput="onSetFilterBy({custom: this.value})">
+                <input class="custom-filter btn-border" type="text" data-trans="enter-book-name-placeholder" placeholder="Enter Book Name..." oninput="onSetFilterBy({custom: this.value})">
             </div>
             <div class="misc-btn-container">   
                 <hr />

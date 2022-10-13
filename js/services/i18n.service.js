@@ -39,12 +39,12 @@ const gTrans = {
         'eng': 'Filter',
     },
     'max-price-range-header': {
-        'heb': 'סנן',
-        'eng': 'Filter',
-    },
-    'min-rate-range-header': {
         'heb': 'מחיר מקסימאלי',
         'eng': 'Max Price',
+    },
+    'min-rate-range-header': {
+        'heb': 'דירוג מינימאלי',
+        'eng': 'Min Rate',
     },
     'misc-header': {
         'heb': 'שונות',
@@ -149,13 +149,20 @@ const gTrans = {
 
 }
 
+
 function doTrans() {
-    const els = document.querySelectorAll('[data-trans]')
+    var els = document.querySelectorAll('[data-trans]')
     els.forEach(el => {
         const transKey = el.dataset.trans
         const trans = _getTrans(transKey)
         el.innerText = trans
         if (el.placeholder) el.placeholder = trans
+    })
+
+    els = document.querySelectorAll('[data-price]')
+
+    els.forEach(el => {
+        el.innerText = formatCurrencySign(currencyConversion(+el.dataset.price))
     })
 }
 
@@ -168,6 +175,17 @@ function getLang() {
     return gLang
 }
 
+function formatCurrencySign(num) {
+    const locale = (gLang === ENGLISH) ? 'en-US' : 'he-IL'
+    const currency = (gLang === ENGLISH) ? 'USD' : 'ILS'
+
+    return new Intl.NumberFormat(locale, {style: 'currency', currency,}).format(num);
+}
+
+function currencyConversion(amount) {
+    return (gLang === ENGLISH) ? amount : amount / 3.6
+}
+
 function _getTrans(transKey) {
     const transMap = gTrans[transKey]
     if (!transMap) return 'Unknown'
@@ -177,3 +195,9 @@ function _getTrans(transKey) {
 
     return trans
 }
+
+function getPriceRange(rangeValue) {
+    return Math.round(currencyConversion(rangeValue))
+}
+    
+

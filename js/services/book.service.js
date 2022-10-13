@@ -77,7 +77,11 @@ function setFilterBy(filterObj = {}) {
     if (filterObj.maxPrice !== undefined) gFilterBy.maxPrice = +filterObj.maxPrice
     if (filterObj.minRate !== undefined) gFilterBy.minRate = +filterObj.minRate
     if (filterObj.custom !== undefined) gFilterBy.custom = filterObj.custom
-    
+
+    if (gFilterBy.maxPrice && getLang() !== 'eng') {
+        gFilterBy.maxPrice = currencyConversion(gFilterBy.maxPrice)
+    }
+
     return gFilterBy
 }
 

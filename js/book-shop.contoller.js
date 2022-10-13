@@ -16,7 +16,6 @@ function renderApp() {
     renderAppByQueryStringParams()
     renderPaging()
     renderBooks()
-    
 }
 
 function renderPaging() {
@@ -65,7 +64,7 @@ function renderBooks() {
             <tr>
                 <td>${book.id}</td>
                 <td>${book.name}</td>
-                <td>${book.price}</td>
+                <td data-price="${book.price}" >${formatCurrencySign(book.price)}</td>
                 <td>${book.rating}</td>
                 <td><img src="${book.imgUrl}"></img></td>
                 <td><button data-trans="read-action" onclick="onOpenBookModal('${book.id}')">Read</button></td>
@@ -113,7 +112,6 @@ function updateWindowPath() {
     _setQueryStringByModal()
     _setQueryStringByPage()
     _setQueryStringByLang()
-    console.log(gQueryString);
 
     const queryString = getQueryStringParams()
 
@@ -151,7 +149,9 @@ function renderAppByQueryStringParams() {
 
 function onRemoveBook(bookId) {
     removeBook(bookId)
-    renderApp()
+
+    renderPaging()
+    renderBooks()
 }
 
 function onAddBook() {
@@ -169,15 +169,15 @@ function onAddBook() {
 
     addBook(bookName, price, rating, imgUrl)
     _resetFilters()
-    renderApp()
+
+    renderPaging()
+    renderBooks()
     onCloseAddBookModal()
 }
 
 function onOpenBookModal(bookId) {
 
     const book = openBook(bookId)
-    console.log('bookId', bookId);
-    console.log('book', book);
     document.querySelector('.abstract').innerText = book.abstract
     document.querySelector('.name-id').innerText = book.id
     document.querySelector('.name-name').innerText = book.name
@@ -202,13 +202,16 @@ function onCloseBookModal() {
     _setModalDisplay(OFF)
 
     updateWindowPath()
-    renderApp()
+    renderPaging()
+    renderBooks()
 }
 
 function onUpdateBook(bookId) {
     const price = prompt('New price?')
     updateBook(bookId, price)
-    renderApp()
+    
+    renderPaging()
+    renderBooks()
 }
 
 
@@ -234,7 +237,9 @@ function onSetSortBy() {
 
     setSortBy(sortBy)
     updateWindowPath()
-    renderApp()
+
+    renderPaging()
+    renderBooks()
 }
 
 function onSetFilterBy(filterObj) {
@@ -242,7 +247,8 @@ function onSetFilterBy(filterObj) {
     onSetPage(0)
 
     updateWindowPath()
-    renderApp()
+    renderPaging()
+    renderBooks()
 }
 
 function onSetPage(page) {
@@ -271,7 +277,9 @@ function onCloseAddBookModal() {
 function onSwitchBooksDisplay() {
     var view = getViewPref()
     toggleBooksViewPref()
-    renderApp()
+
+    renderPaging()
+    renderBooks()
 
     const elImg = document.querySelector('.view-switch-img')
     elImg.src = `img/${view}-icon.png`
