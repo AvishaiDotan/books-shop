@@ -7,10 +7,10 @@ This project is an application that allows users to manage a collection of books
 - Adding new books to the **inventory**
 - Editing existing book entries
 - Removing books from the list
-- 
-![Book-Shop (2)](https://user-images.githubusercontent.com/108017307/211169250-c1f7c014-5d2f-4938-887e-a0a8f1834a23.png)
 
 The application simulates the functionality of a **real-world bookstore administrator**, making it a useful tool for those in the book industry.
+
+![Book-Shop (2)](https://user-images.githubusercontent.com/108017307/211169250-c1f7c014-5d2f-4938-887e-a0a8f1834a23.png)
 
 ## Tech
 Javascript, CSS
@@ -19,6 +19,6 @@ Javascript, CSS
 CRUD, MVC
 
 
-<a href="https://avishaidotan.github.io/books-shop/">Link<a/>
+<a href="https://avishaidotan.github.io/books-shop/">Link to GitHub pages deployment<a/>
 
 
