@@ -1,7 +1,14 @@
+# Bookstore Administration Tool
 
-# Books Store
+This project is an application that allows users to manage a collection of books. It was implemented using **vanilla JavaScript** and includes features such as:
 
-This project is a <span style="color:#008000">bookstore administration tool</span> implemented in <span style="color:#008000">vanilla JavaScript</span>. It allows the user to perform <span style="color:#008000">CRUD</span> (create, read, update, delete) operations on a collection of <span style="color:#008000">books</span>. In addition, the user can filter the list of books by <span style="color:#008000">price</span>, <span style="color:#008000">rating</span>, and <span style="color:#008000">name</span>. The user can add new books to the <span style="color:#008000">inventory</span>, edit existing entries, and remove books from the list. The application simulates the functionality of a <span style="color:#008000">real-world bookstore administrator</span>.
+- **CRUD** (create, read, update, delete) operations on books
+- Filtering books by **price**, **rating**, and **name**
+- Adding new books to the **inventory**
+- Editing existing book entries
+- Removing books from the list
+
+The application simulates the functionality of a **real-world bookstore administrator**, making it a useful tool for those in the book industry.
 
 ## Tech
 Javascript, CSS
